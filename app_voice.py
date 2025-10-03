@@ -100,6 +100,8 @@ default_index = default_in if isinstance(default_in, int) and 0 <= default_in < 
 device_choice = st.sidebar.selectbox("Input device (pick virtual/monitor for system audio)", device_labels, index=default_index)
 device_index = int(device_choice.split(":")[0])
 
+st.write(device_choice)
+
 # Whisper model picker
 whisper_name = st.sidebar.selectbox("Whisper model", ["tiny","base","small","medium","large"], index=2)
 model = load_whisper_model(whisper_name)
@@ -120,7 +122,7 @@ with st.sidebar.expander("Diagnostics"):
 # --------------- action ----------------
 if st.button("Start Recording", type="primary"):
     try:
-        audio = record_from_device(duration=duration, fs=fs, channels=channels, dtype=dtype, device_index=device_index)
+        audio = record_from_device(duration=duration, fs=fs, channels=channels, dtype=dtype, device_index=17)
         audio = ensure_int16(audio)  # ensure 16-bit PCM for WAV
 
         ts = datetime.now().strftime("%Y%m%d-%H%M%S")
